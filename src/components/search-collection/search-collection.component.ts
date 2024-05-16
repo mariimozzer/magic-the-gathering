@@ -10,33 +10,41 @@ import { MtgsdkService } from '../../services/api.service';
 export class SearchCollectionComponent implements OnInit {
   form: FormGroup = new FormGroup({
     name: new FormControl(''), 
-    block: new FormControl('', Validators.required)  
+    block: new FormControl('', Validators.required)
   });
 
+  sets: any[] = [];
   cards: any[] = [];
 
   constructor(private mtgService: MtgsdkService) {}
 
-  ngOnInit(): void {
-   
-  }
+  ngOnInit(): void {}
 
-  searchCards(): void {
-    console.log("searchCards called"); 
+  searchSets(): void {
     if (this.form.valid) {
-      this.mtgService.queryCards(this.form.value).then(cards => {
-        this.cards = []; 
-        this.cards = cards;
+      this.mtgService.querySets(this.form.value).then(sets => {
+        this.sets = sets;
       }).catch(error => {
-        console.error('Erro ao buscar cartas:', error);
+        console.error('Erro ao buscar sets:', error);
       });
     } else {
-      alert('Por favor, selecione um bloco.');  
+      alert('Por favor, selecione um bloco.');
     }
   }
 
-  trackCard(index: number, card: any): any {
+  selectSet(setId: string): void {
+    this.mtgService.getCreaturesFromBooster(setId).then(cards => {
+      this.cards = cards;
+    }).catch(error => {
+      console.error('Erro ao buscar cartas:', error);
+    });
+  }
+
+  trackBySetId(index: number, set: any): any {
+    return set.code;
+  }
+
+  trackByCardId(index: number, card: any): any {
     return card.id;
   }
-  
 }

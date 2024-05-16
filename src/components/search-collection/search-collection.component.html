@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="searchCards()">
+<form [formGroup]="form" (ngSubmit)="searchSets()">
   <div class="search-form">
     <input formControlName="name" type="text" placeholder="Nome" class="form-control">
     <select formControlName="block" class="form-control">
@@ -12,7 +12,23 @@
     <button type="submit">Buscar</button>
   </div>
 </form>
-<div *ngFor="let card of cards; trackBy: trackCard">
-  <p>{{ card.name }}</p>
+
+<div *ngIf="sets.length">
+  <h3>Resultados da Pesquisa</h3>
+  <div *ngFor="let set of sets; trackBy: trackBySetId">
+    <p>{{ set.name }} - {{ set.block }} - {{ set.releaseDate }}</p>
+    <button (click)="selectSet(set.code)">Selecionar</button>
+  </div>
+</div>
+
+<div *ngIf="cards.length">
+  <h3>Suas cartas do pacote aberto</h3>
+  <div *ngFor="let card of cards; trackBy: trackByCardId">
+    <p>{{ card.name }}</p>
+    <p>{{ card.manaCost }}</p>
+    <p>{{ card.colorIdentity }}</p>
+    <p>{{ card.text }}</p>
+    <img [src]="card.imageUrl" alt="{{ card.name }}">
+  </div>
 </div>
 
