@@ -21,12 +21,12 @@
   </div>
 </div>
 
-<div *ngIf="loading" class="loading">
-  <i class="fa fa-spinner fa-spin"></i> 
+<div *ngIf="loading" class="loading" style="font-size: larger;">
+ Carregando <i class="fa fa-spinner fa-spin"></i> 
 </div>
 
 
-<div *ngIf="cards.length">
+<div *ngIf="cards.length && !loading">
   <h3>Suas cartas do pacote aberto</h3>
   <div *ngFor="let card of cards; trackBy: trackByCardId" class="card">
     <p>{{ card.name }}</p>
