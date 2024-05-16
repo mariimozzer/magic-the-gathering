@@ -1,0 +1,12 @@
+
+
+<div *ngFor="let card of cards" class="card">
+    <h3>{{ card.name }}</h3>
+    <img *ngIf="card.imageUrl" [src]="card.imageUrl" alt="{{ card.name }}">
+    <p><strong>Mana Cost:</strong> {{ card.manaCost }}</p>
+    <p><strong>Type:</strong> {{ card.type }}</p>
+    <p><strong>Rarity:</strong> {{ card.rarity }}</p>
+    <p><strong>Description:</strong> {{ card.text }}</p>
+  </div>
+  
+

@@ -1,0 +1,18 @@
+<form [formGroup]="form" (ngSubmit)="searchCards()">
+  <div class="search-form">
+    <input formControlName="name" type="text" placeholder="Nome" class="form-control">
+    <select formControlName="block" class="form-control">
+      <option value="">Selecione um Bloco</option>
+      <option value="Amonkhet">Amonkhet</option>
+      <option value="Ixalan">Ixalan</option>
+      <option value="Zendikar">Zendikar</option>
+      <option value="Ravnica">Ravnica</option>
+      <option value="Onslaught">Onslaught</option>
+    </select>
+    <button type="submit">Buscar</button>
+  </div>
+</form>
+<div *ngFor="let card of cards; trackBy: trackCard">
+  <p>{{ card.name }}</p>
+</div>
+
